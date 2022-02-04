@@ -1,0 +1,7 @@
+{
+    "error": "Error english!",
+    "bad_request": "Bad request!",
+    "something_went_wrong": "Something went wrong!",
+    "missing_fields": "Missing fields!",
+    "no_data_found": "No data found!"
+}

@@ -2,9 +2,9 @@ const ApiError = require("./ApiError")
 
 function ApiErrorHandler(err, req, res, next) {
     if (err instanceof ApiError) {
-        return res.status(err.code).json({ error: err.message })
+        return res.status(err.code).json({ error: req.t(err.message) })
     }
-    return res.status(500).json({ error: 'Something went wrong!' })
+    return res.status(500).json({ error: req.t('something_went_wrong') })
 }
 
 module.exports = ApiErrorHandler

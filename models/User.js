@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
 
+
 const User = sequelize.define('User', {
     id: {
         type: DataTypes.UUID,
@@ -12,7 +13,7 @@ const User = sequelize.define('User', {
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: "Erro, não pode estar vazio"
+                msg: "Error! Field is required"
             }
         }
     }

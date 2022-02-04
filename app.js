@@ -2,6 +2,8 @@
 const db = require('./config/database')
 const dotenv = require('dotenv')
 const express = require('express')
+const ApiErrorHandler = require('./errors/ApiErrorHandler')
+
 
 db.authenticate()
     .then(() => console.log('Connection has been established successfully.'))
@@ -19,6 +21,6 @@ app.use(`${process.env.BASEPATH}/users`, require('./routes/users'))
 
 app.get(`*`, (req, res) => res.send('ERROR! BAD URL - SHOP WEBSERVICES'));
 
-
+app.use(ApiErrorHandler)
 
 module.exports = app

@@ -7,6 +7,8 @@ class ApiError {
     static badRequest(error) {
         //Do not use in production
         console.error({ error: error });
+
+        //dar parse da string
         return new ApiError(400, 'bad_request')
     }
     static missingFields() {

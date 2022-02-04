@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/insert', async (req, res, next) => {
     try {
-        const { name } = req.body
+        const { email, password, name } = req.body
 
         const dataObject = {
             name: name
@@ -30,7 +30,7 @@ router.post('/insert', async (req, res, next) => {
 
         return res.status(200).json({ data: request.toJSON() })
     } catch (error) {
-        return next(ApiError.badRequest(error))
+        return next(ApiError.badRequest(error.message))
     }
 })
 

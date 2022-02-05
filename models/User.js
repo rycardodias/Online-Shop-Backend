@@ -40,7 +40,7 @@ const User = sequelize.define('User', {
         }
     },
     phone: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         validate: {
             isNumeric: {
                 msg: "Error! Field {phone} must be a number!"
@@ -48,7 +48,7 @@ const User = sequelize.define('User', {
         }
     },
     active: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1
     }

@@ -4,5 +4,7 @@
     "something_went_wrong": "Something went wrong!",
     "missing_fields": "Missing fields!",
     "no_data_found": "No data found!",
-    "error_field_required": "Error! Field {{field}} is required!"
+    "error_field_required": "Error! Field {{field}} is required!",
+    "notNull Violation": "Field {{field}} cannot be null!",
+    "Validation error": "Validation failure on '{{field}}' field!"
 }

@@ -30,7 +30,7 @@ router.post('/insert', async (req, res, next) => {
 
         return res.status(200).json({ data: request.toJSON() })
     } catch (error) {
-        return next(ApiError.badRequest(error.message))
+        return next(ApiError.badRequest(error.errors))
     }
 })
 

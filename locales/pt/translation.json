@@ -2,5 +2,7 @@
     "error": "Erro PT!",
     "bad_request": "Pedido com erros!",
     "missing_fields": "Campos em falta!",
-    "no_data_found": "Não foram encontrados dados!"
+    "no_data_found": "Não foram encontrados dados!",
+    "notNull Violation": "Atributo {{field}} não pode ser nulo!",
+    "Validation error": "Falha ao validar o atributo '{{field}}' !"
 }

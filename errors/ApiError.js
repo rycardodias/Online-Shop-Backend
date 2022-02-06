@@ -40,6 +40,12 @@ class ApiError {
     static invalidTokenPermissions() {
         return new ApiError(401, 'invalid_token_permissions')
     }
+    static invalidDelete() {
+        return new ApiError(401, 'invalid_delete')
+    }
+    static invalidUpdate() {
+        return new ApiError(401, 'invalid_update')
+    }
 }
 
 module.exports = ApiError

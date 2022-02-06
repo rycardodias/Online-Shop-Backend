@@ -8,5 +8,9 @@
     "notNull Violation": "Field {{field}} cannot be null!",
     "Validation error": "Validation failure on '{{field}}' field!",
     "invalid_token": "Invalid Token Authorization!",
-    "invalid_token_permissions": "Invalid Token Permissions!"
+    "invalid_token_permissions": "Invalid Token Permissions!",
+    "password_changed": "Password changed successfully!",
+    "row_deleted": "Row deleted successfully!",
+    "invalid_delete": "Invalid Delete Operation!",
+    "invalid_update": "Invalid Update Operation!"
 }

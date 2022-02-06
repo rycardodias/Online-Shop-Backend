@@ -8,17 +8,13 @@ module.exports = (permissionRequired) => {
             if (!token) next(ApiError.invalidToken())
 
             const tokenObj = jwt.verify(token, process.env.TOKEN_SECRET)
-            console.log(tokenObj);
-            if (Math.floor(Date.now() / 1000) > tokenObj.exp) {
-                console.log("fora");
-            }
+            
             let exists = false
             permissionRequired.map(item => {
                 for (const element of tokenObj.permissions) {
                     if (element === item) exists = true
                 }
             })
-
 
             if (exists) {
                 next()
@@ -27,6 +23,7 @@ module.exports = (permissionRequired) => {
             }
         }
         catch (error) {
+            console.log(error);
             next(ApiError.invalidTokenPermissions())
         }
     }

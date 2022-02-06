@@ -37,6 +37,7 @@ app.use(cookieSession({
 app.get(`${process.env.BASEPATH}`, (req, res) => res.send('INDEX - SHOP WEBSERVICES'));
 
 app.use(`${process.env.BASEPATH}/users`, require('./routes/users'))
+app.use(`${process.env.BASEPATH}/products`, require('./routes/products'))
 
 app.get(`*`, (req, res) => res.send('ERROR! BAD URL - SHOP WEBSERVICES'));
 

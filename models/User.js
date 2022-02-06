@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
-const i18next = require('i18next')
 
 
 const User = sequelize.define('User', {
@@ -12,6 +11,7 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             notEmpty: {
                 msg: "Error! Field {email} is required!"

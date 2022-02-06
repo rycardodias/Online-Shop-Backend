@@ -2,10 +2,12 @@
 const db = require('./config/database')
 const dotenv = require('dotenv')
 const express = require('express')
+var cookieSession = require('cookie-session')
 const ApiErrorHandler = require('./errors/ApiErrorHandler')
 const i18next = require('i18next')
 var middleware = require('i18next-http-middleware')
 const Backend = require('i18next-fs-backend')
+
 
 // db.authenticate()
 //     .then(() => console.log('Connection has been established successfully.'))
@@ -25,6 +27,12 @@ i18next.use(Backend).use(middleware.LanguageDetector).init({
 const app = express()
 app.use(middleware.handle(i18next))
 app.use(express.json())
+
+app.use(cookieSession({
+    signed: false
+}))
+
+// app.use(jwt({ secret: process.env.TOKEN_SECRET, algorithms: ['HS256'] }))
 
 app.get(`${process.env.BASEPATH}`, (req, res) => res.send('INDEX - SHOP WEBSERVICES'));
 

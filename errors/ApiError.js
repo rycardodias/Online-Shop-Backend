@@ -8,16 +8,21 @@ class ApiError {
     static badRequest(error) {
         let errorArray = []
         //Do not use in production
-        for (const element of error) {
-            switch (element.type) {
-                case 'notNull Violation':
-                    errorArray.push({ type: element.type, field: element.path })
-                    break;
-                case 'Validation error':
-                    errorArray.push({ type: element.type, field: element.path })
-                    break;
-                default:
-                    break;
+        if (!error?.length) {
+            return new ApiError(400, 'bad_request')
+        } else {
+            for (const element of error) {
+                switch (element.type) {
+                    case 'notNull Violation':
+                        errorArray.push({ type: element.type, field: element.path })
+                        break;
+                    case 'Validation error':
+                        errorArray.push({ type: element.type, field: element.path })
+                        break;
+                    default:
+                        errorArray.push({ type: 'unknown_error', field: element.path })
+                        break;
+                }
             }
         }
 
@@ -28,6 +33,12 @@ class ApiError {
     }
     static noDataFound() {
         return new ApiError(404, 'no_data_found')
+    }
+    static invalidToken() {
+        return new ApiError(401, 'invalid_token')
+    }
+    static invalidTokenPermissions() {
+        return new ApiError(401, 'invalid_token_permissions')
     }
 }
 

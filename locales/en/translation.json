@@ -6,5 +6,7 @@
     "no_data_found": "No data found!",
     "error_field_required": "Error! Field {{field}} is required!",
     "notNull Violation": "Field {{field}} cannot be null!",
-    "Validation error": "Validation failure on '{{field}}' field!"
+    "Validation error": "Validation failure on '{{field}}' field!",
+    "invalid_token": "Invalid Token Authorization!",
+    "invalid_token_permissions": "Invalid Token Permissions!"
 }

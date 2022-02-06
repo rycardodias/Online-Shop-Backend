@@ -47,6 +47,11 @@ const User = sequelize.define('User', {
             }
         }
     },
+    permission: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'USER'
+    },
     active: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -4,11 +4,14 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-session": "^2.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "i18next": "^21.6.10",
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-middleware": "^3.1.6",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",

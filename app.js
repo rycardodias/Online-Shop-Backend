@@ -8,7 +8,6 @@ const i18next = require('i18next')
 var middleware = require('i18next-http-middleware')
 const Backend = require('i18next-fs-backend')
 
-
 // db.authenticate()
 //     .then(() => console.log('Connection has been established successfully.'))
 //     .catch((error) => console.error('Unable to connect to the database:', error))
@@ -20,7 +19,6 @@ i18next.use(Backend).use(middleware.LanguageDetector).init({
     backend: {
         loadPath: './locales/{{lng}}/translation.json'
     }
-    // ...otherOptions
 })
 
 
@@ -32,12 +30,14 @@ app.use(cookieSession({
     signed: false
 }))
 
-// app.use(jwt({ secret: process.env.TOKEN_SECRET, algorithms: ['HS256'] }))
-
 app.get(`${process.env.BASEPATH}`, (req, res) => res.send('INDEX - SHOP WEBSERVICES'));
 
 app.use(`${process.env.BASEPATH}/users`, require('./routes/users'))
 app.use(`${process.env.BASEPATH}/products`, require('./routes/products'))
+app.use(`${process.env.BASEPATH}/orders`, require('./routes/orders'))
+app.use(`${process.env.BASEPATH}/orderLines`, require('./routes/orderLines'))
+app.use(`${process.env.BASEPATH}/orderStatus`, require('./routes/orderStatus'))
+app.use(`${process.env.BASEPATH}/stocks`, require('./routes/stocks'))
 
 app.get(`*`, (req, res) => res.send('ERROR! BAD URL - SHOP WEBSERVICES'));
 

@@ -6,8 +6,11 @@ class ApiError {
     }
 
     static badRequest(error) {
-        let errorArray = []
         //Do not use in production
+        console.log(error);
+
+        
+        let errorArray = []
         if (!error?.length) {
             return new ApiError(400, 'bad_request')
         } else {

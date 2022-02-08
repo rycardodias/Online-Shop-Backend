@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const Model = require('../models/Product')
+const Model = require('../models/OrderLine')
 const ApiError = require('../errors/ApiError')
 const authorization = require('../middlewares/authorization');
 
 router.get('/', async (req, res, next) => {
     try {
-        const request = await Model.findAll({ exclude: ['password'] })
+        const request = await Model.findAll()
 
         if (!request[0]) return next(ApiError.noDataFound())
 
@@ -17,15 +17,16 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/insert', authorization(['ADMIN', 'STAFF']), async (req, res, next) => {
+router.post('/insert', async (req, res, next) => {
     try {
-        const { name, description, price, tax } = req.body
+        const { OrderId, ProductId, quantity, total, totalTax } = req.body
 
         const dataObject = {
-            name: name,
-            description: description,
-            price: price,
-            tax: tax
+            OrderId: OrderId,
+            ProductId: ProductId,
+            quantity: quantity,
+            total: total,
+            totalTax: totalTax,
         }
 
         const request = await Model.create(dataObject)
@@ -39,13 +40,12 @@ router.post('/insert', authorization(['ADMIN', 'STAFF']), async (req, res, next)
 
 router.put('/update', authorization(['ADMIN', 'STAFF']), async (req, res, next) => {
     try {
-        const { id, name, description, price, tax } = req.body
+        const { id, quantity, total, totalTax } = req.body
 
         const dataObject = {
-            name: name,
-            description: description,
-            price: price,
-            tax: tax
+            quantity: quantity,
+            total: total,
+            totalTax: totalTax,
         }
 
         const request = await Model.update(dataObject, { where: { id: id }, returning: true })

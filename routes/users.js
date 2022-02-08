@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const authorization = require('../middlewares/authorization');
 
-router.get('/', authorization(['ADMIN']), async (req, res, next) => {
+router.get('/', authorization(['ADMIN', 'STAFF']), async (req, res, next) => {
     try {
         const request = await Model.findAll({ exclude: ['password'] })
 
@@ -65,7 +65,7 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
-router.put('/change-password', async (req, res, next) => {
+router.put('/change-password', authorization(['ADMIN', 'USER', 'STAFF']), async (req, res, next) => {
     try {
         const { email, password, newPassword } = req.body
 
@@ -78,6 +78,21 @@ router.put('/change-password', async (req, res, next) => {
         if (update[0] === 0) return next(ApiError.invalidUpdate())
 
         return res.status(200).json({ data: req.t('password_changed') })
+
+    } catch (error) {
+        return next(ApiError.badRequest(error.errors))
+    }
+})
+
+router.put('/change-permission', authorization(['ADMIN']), async (req, res, next) => {
+    try {
+        const { email, permission } = req.body
+
+        const update = await Model.update({ permission: permission }, { where: { email: email } })
+
+        if (update[0] === 0) return next(ApiError.invalidUpdate())
+
+        return res.status(200).json({ data: req.t('permission_changed') })
 
     } catch (error) {
         return next(ApiError.badRequest(error.errors))

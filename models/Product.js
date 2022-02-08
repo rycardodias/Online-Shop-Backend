@@ -27,6 +27,15 @@ const Product = sequelize.define('Product', {
                 msg: "Error! Field 'price' is required"
             }
         }
+    },
+    tax: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: "Error! Field 'tax' is required"
+            }
+        }
     }
 })
 

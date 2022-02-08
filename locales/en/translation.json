@@ -10,6 +10,7 @@
     "invalid_token": "Invalid Token Authorization!",
     "invalid_token_permissions": "Invalid Token Permissions!",
     "password_changed": "Password changed successfully!",
+    "permission_changed": "Permissions changed successfully!",
     "row_deleted": "Row deleted successfully!",
     "invalid_delete": "Invalid Delete Operation!",
     "invalid_update": "Invalid Update Operation!"

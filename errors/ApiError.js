@@ -5,11 +5,7 @@ class ApiError {
         this.objectMessage = objectMessage
     }
 
-    static badRequest(error) {
-        //Do not use in production
-        console.log(error);
-
-        
+    static badRequest(error) {        
         let errorArray = []
         if (!error?.length) {
             return new ApiError(400, 'bad_request')

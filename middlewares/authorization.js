@@ -23,7 +23,6 @@ module.exports = (permissionRequired) => {
             }
         }
         catch (error) {
-            console.log(error);
             next(ApiError.invalidTokenPermissions())
         }
     }

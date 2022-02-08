@@ -8,6 +8,8 @@ const i18next = require('i18next')
 var middleware = require('i18next-http-middleware')
 const Backend = require('i18next-fs-backend')
 
+const compression = require('compression')
+
 // db.authenticate()
 //     .then(() => console.log('Connection has been established successfully.'))
 //     .catch((error) => console.error('Unable to connect to the database:', error))
@@ -30,6 +32,7 @@ app.use(cookieSession({
     signed: false
 }))
 
+
 app.get(`${process.env.BASEPATH}`, (req, res) => res.send('INDEX - SHOP WEBSERVICES'));
 
 app.use(`${process.env.BASEPATH}/users`, require('./routes/users'))
@@ -42,5 +45,7 @@ app.use(`${process.env.BASEPATH}/stocks`, require('./routes/stocks'))
 app.get(`*`, (req, res) => res.send('ERROR! BAD URL - SHOP WEBSERVICES'));
 
 app.use(ApiErrorHandler)
+
+app.use(compression())
 
 module.exports = app

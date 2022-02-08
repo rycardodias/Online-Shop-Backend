@@ -77,7 +77,6 @@ router.delete('/delete', authorization(['ADMIN', 'STAFF']), async (req, res, nex
         return res.status(200).json({ data: req.t('row_deleted') })
 
     } catch (error) {
-        console.log(error);
         return next(ApiError.badRequest(error.errors))
     }
 })

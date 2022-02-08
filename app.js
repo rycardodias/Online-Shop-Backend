@@ -7,8 +7,8 @@ const ApiErrorHandler = require('./errors/ApiErrorHandler')
 const i18next = require('i18next')
 var middleware = require('i18next-http-middleware')
 const Backend = require('i18next-fs-backend')
-
 const compression = require('compression')
+const helmet = require("helmet");
 
 // db.authenticate()
 //     .then(() => console.log('Connection has been established successfully.'))
@@ -25,6 +25,9 @@ i18next.use(Backend).use(middleware.LanguageDetector).init({
 
 
 const app = express()
+app.use(helmet())
+app.use(compression())
+
 app.use(middleware.handle(i18next))
 app.use(express.json())
 
@@ -46,6 +49,5 @@ app.get(`*`, (req, res) => res.send('ERROR! BAD URL - SHOP WEBSERVICES'));
 
 app.use(ApiErrorHandler)
 
-app.use(compression())
 
 module.exports = app

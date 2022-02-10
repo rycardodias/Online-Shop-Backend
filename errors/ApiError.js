@@ -5,9 +5,9 @@ class ApiError {
         this.objectMessage = objectMessage
     }
 
-    static badRequest(error) {        
+    static badRequest(error) {
         let errorArray = []
-        if (!error.length) {
+        if (!error) {
             return new ApiError(400, 'bad_request')
         } else {
             for (const element of error) {
@@ -24,9 +24,9 @@ class ApiError {
                 }
             }
         }
-
         return new ApiError(400, 'bad_request', errorArray)
     }
+
     static missingFields() {
         return new ApiError(400, 'missing_fields')
     }

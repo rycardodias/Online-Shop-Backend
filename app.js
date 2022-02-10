@@ -2,6 +2,7 @@
 const db = require('./config/database')
 const dotenv = require('dotenv')
 const express = require('express')
+const cors = require("cors")
 var cookieSession = require('cookie-session')
 const ApiErrorHandler = require('./errors/ApiErrorHandler')
 const i18next = require('i18next')
@@ -27,6 +28,15 @@ i18next.use(Backend).use(middleware.LanguageDetector).init({
 const app = express()
 app.use(helmet())
 app.use(compression())
+
+app.use(
+    cors(
+        {
+            origin: '*',
+            credentials: true
+        }
+    )
+);
 
 app.use(middleware.handle(i18next))
 app.use(express.json())

@@ -6,7 +6,22 @@ const authorization = require('../middlewares/authorization');
 
 router.get('/', async (req, res, next) => {
     try {
-        const request = await Model.findAll({ exclude: ['password'] })
+        const request = await Model.findAll()
+
+        if (!request[0]) return next(ApiError.noDataFound())
+
+        return res.status(200).json({ data: request })
+
+    } catch (error) {
+        next(ApiError.badRequest(error.errors))
+    }
+})
+
+router.get('/id/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params
+        
+        const request = await Model.findAll({ where: { id: id } })
 
         if (!request[0]) return next(ApiError.noDataFound())
 

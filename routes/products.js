@@ -20,8 +20,8 @@ router.get('/', async (req, res, next) => {
 router.get('/id/:id', async (req, res, next) => {
     try {
         const { id } = req.params
-        
-        const request = await Model.findAll({ where: { id: id } })
+
+        const request = await Model.findByPk(id)
 
         if (!request[0]) return next(ApiError.noDataFound())
 

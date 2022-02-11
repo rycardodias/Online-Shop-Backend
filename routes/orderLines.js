@@ -17,6 +17,21 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+router.get('/id/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params
+
+        const request = await Model.findByPk(id)
+
+        if (!request) return next(ApiError.noDataFound())
+
+        return res.status(200).json({ data: request.toJSON() })
+
+    } catch (error) {
+        next(ApiError.badRequest(error.errors))
+    }
+})
+
 router.post('/insert', async (req, res, next) => {
     try {
         const { OrderId, ProductId, quantity, total, totalTax } = req.body

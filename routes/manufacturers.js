@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Model = require('../models/Product')
+const Model = require('../models/Manufacturer')
 const ApiError = require('../errors/ApiError')
 const authorization = require('../middlewares/authorization');
-
 
 router.get('/', async (req, res, next) => {
     try {
@@ -35,27 +34,11 @@ router.get('/id/:id', async (req, res, next) => {
 
 router.post('/insert', authorization(['ADMIN', 'STAFF']), async (req, res, next) => {
     try {
-        const { type, ManufacturerId, name, description, price, tax, images, os, ram, storage, storageType, refreshRate, displaySize, resolution, wifi, smartTv } = req.body
+        const { name } = req.body
 
         const dataObject = {
-            type: type,
-            ManufacturerId: ManufacturerId,
             name: name,
-            description: description,
-            price: price,
-            tax: tax,
-            images: images,
-            os: os,
-            ram: ram,
-            storage: storage,
-            storageType: storageType,
-            refreshRate: refreshRate,
-            displaySize: displaySize,
-            resolution: resolution,
-            wifi: wifi,
-            smartTv: smartTv
         }
-
 
         const request = await Model.create(dataObject)
 
@@ -68,23 +51,10 @@ router.post('/insert', authorization(['ADMIN', 'STAFF']), async (req, res, next)
 
 router.put('/update', authorization(['ADMIN', 'STAFF']), async (req, res, next) => {
     try {
-        const { id, name, description, price, tax, images, os, ram, storage, storageType, refreshRate, displaySize, resolution, wifi, smartTv } = req.body
+        const { id, name,  } = req.body
 
         const dataObject = {
             name: name,
-            description: description,
-            price: price,
-            tax: tax,
-            images: images,
-            os: os,
-            ram: ram,
-            storage: storage,
-            storageType: storageType,
-            refreshRate: refreshRate,
-            displaySize: displaySize,
-            resolution: resolution,
-            wifi: wifi,
-            smartTv: smartTv
         }
 
         const request = await Model.update(dataObject, { where: { id: id }, returning: true })

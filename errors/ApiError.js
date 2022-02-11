@@ -7,6 +7,7 @@ class ApiError {
 
     static badRequest(error) {
         let errorArray = []
+        return new ApiError(400, 'bad_request')
         if (!error) {
             return new ApiError(400, 'bad_request')
         } else {

@@ -63,6 +63,7 @@ router.post("/create", async (req, res, next) => {
 
         util.promisify(file.mv)(URL + fileNameSaved).then(async () => {
             try {
+
                 // requiredSizes.forEach(async (value) => {
                 //     if (sizes[value]) {
                 //         const imageResized = await resizeImg(fs.readFileSync(URL + fileNameSaved), sizes[value])
@@ -71,16 +72,16 @@ router.post("/create", async (req, res, next) => {
                 //     }
                 // })
                 fs.writeFileSync(URL + fileNameSaved, file);
+
             } catch (error) {
-                return next(ApiError.badRequest())
+                res.status(500).json({ error: error })
             }
         })
             .then(() => fs.unlinkSync(URL + fileNameSaved))
-            .catch(error => next(ApiError.badRequest()))
 
         res.status(200).json({ data: { url: URL + fileNameSaved, fileName: fileNameSaved } })
     } catch (error) {
-        return next(ApiError.badRequest())
+        return res.status(500).json({ error: error })
     }
 });
 

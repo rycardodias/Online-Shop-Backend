@@ -32,9 +32,8 @@ router.get("/:file", async (req, res, next) => {
         return next(ApiError.badRequest(error))
     }
 })
-router.post("/create", async (req, res, next) => {
+router.post("/create", async (req, res) => {
     try {
-        // const requiredSizes = ["1:1", "16:9"] // JSON.parse(req.body.requiredSizes)
         const file = req.files.file
         const fileName = file.name
         const size = file.data.length
@@ -46,40 +45,34 @@ router.post("/create", async (req, res, next) => {
         if (!allowedExtensions.test(extension)) throw "Unsupported extension!"
         if (size > 1024 * 1024 * 5) throw "File must be less than 5MB"
 
-        // const sizes = {
-        //     '1:1': {
-        //         width: 800,
-        //         height: 800
-        //     },
-        //     '16:9': {
-        //         width: 1920,
-        //         height: 1080
-        //     },
-        // }
-
         const fileNameSaved = v4() + extension
         const dir = __dirname
         const URL = dir.replace("routes", "") + "public/uploads/"
 
         util.promisify(file.mv)(URL + fileNameSaved).then(async () => {
             try {
+                // fs.writeFileSync(URL + fileNameSaved, file);
+                // [requiredSizes].forEach(async (value) => {
+                // if (sizes[value]) {
 
-                // requiredSizes.forEach(async (value) => {
-                //     if (sizes[value]) {
-                //         const imageResized = await resizeImg(fs.readFileSync(URL + fileNameSaved), sizes[value])
+                const imageResized = await resizeImg(fs.readFileSync(URL + fileNameSaved), {
+                    width: 1920,
+                    height: 1080
+                })
 
-                //         fs.writeFileSync(URL + sizes[value].width + 'x' + sizes[value].height + '_' + fileNameSaved, imageResized);
-                //     }
+                fs.writeFileSync(URL + fileNameSaved, imageResized);
+                // }
                 // })
-                fs.writeFileSync(URL + fileNameSaved, file);
-
             } catch (error) {
-                res.status(500).json({ error: error })
+                console.log(error)
+                return res.status(500).json({ error: error })
             }
         })
-            .then(() => fs.unlinkSync(URL + fileNameSaved))
+            .then(() => { }
+                //fs.unlinkSync(URL + fileNameSaved)
+            )
 
-        res.status(200).json({ data: { url: URL + fileNameSaved, fileName: fileNameSaved } })
+        return res.status(200).json({ data: fileNameSaved })
     } catch (error) {
         return res.status(500).json({ error: error })
     }
